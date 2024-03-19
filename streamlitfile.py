@@ -1,32 +1,28 @@
-import re
 import streamlit as st
 
-def extract_urls_from_text(text):
-    # Use regex to find URLs
-    urls = re.findall(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', text)
+st.set_page_config(
+    page_title="Hello",
+    page_icon="👋",
+)
 
-    # Filter URLs to keep only those ending with "_zpid/" and remove duplicates
-    filtered_urls = list(set(url for url in urls if url.endswith("_zpid/")))
+st.write("# Welcome to Streamlit! 👋")
 
-    # Print the filtered URLs
-    if filtered_urls:
-        st.success("Filtered URLs:")
-        for url in filtered_urls:
-            st.write(url)
-        
-        # Export filtered URLs to link.txt
-        with open('link.txt', 'w') as output_file:
-            for i, url in enumerate(filtered_urls):
-                if i < len(filtered_urls) - 1:
-                    output_file.write(f'"{url}",\n')
-                else:
-                    output_file.write(f'"{url}"\n')
-        st.info("Exported filtered URLs to link.txt")
-    else:
-        st.warning("No unique URLs ending with '_zpid/' found in the text.")
+st.sidebar.success("Select a demo above.")
 
-# Streamlit UI
-st.title("URL Extractor from Text")
-text_input = st.text_area("Enter the text:", "Paste your text here...")
-if st.button("Extract URLs"):
-    extract_urls_from_text(text_input)
+st.markdown(
+    """
+    Streamlit is an open-source app framework built specifically for
+    Machine Learning and Data Science projects.
+    **👈 Select a demo from the sidebar** to see some examples
+    of what Streamlit can do!
+    ### Want to learn more?
+    - Check out [streamlit.io](https://streamlit.io)
+    - Jump into our [documentation](https://docs.streamlit.io)
+    - Ask a question in our [community
+        forums](https://discuss.streamlit.io)
+    ### See more complex demos
+    - Use a neural net to [analyze the Udacity Self-driving Car Image
+        Dataset](https://github.com/streamlit/demo-self-driving)
+    - Explore a [New York City rideshare dataset](https://github.com/streamlit/demo-uber-nyc-pickups)
+"""
+)
